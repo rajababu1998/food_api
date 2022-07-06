@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const restaurantRoute = require('./router/restaurants');
+const menuRoute = require('./router/menu');
+const { default: mongoose } = require('mongoose');
 
-const router = express.Router();
+app.use(express.json());
+app.use(cors())
 
 app.get('/', (req, res) => {
     try{
@@ -15,9 +19,9 @@ app.get('/', (req, res) => {
 })
 
 app.use('/restaurants', restaurantRoute);
+app.use('/menu', menuRoute);
 
-
-
+mongoose.connect('mongodb+srv://testuser001:z9xsFuktzYAs4fMk@cluster0.2eq41.mongodb.net/foodie?retryWrites=true&w=majority')
 
 
 app.listen(4000);

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const restaurantSchema = mongoose.Schema({
+const RestaurantSchema = mongoose.Schema({
     rest_id: {
         type: String,
         required: true,
@@ -20,9 +20,14 @@ const restaurantSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String,
+    },
     status: {
         type: Number,
         required: true,
         default: 1
     }
 })
+
+module.exports = mongoose.model('Restaurant', RestaurantSchema);

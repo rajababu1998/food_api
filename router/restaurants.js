@@ -1,8 +1,7 @@
 const express = require('express');
+const Restaurant = require('../models/Restaurant');
 
 const router = express.Router();
-
-
 
 
 // router.get('/', (req, res) => {
@@ -38,6 +37,24 @@ router.get('/', (req, res) => {
     }
 })
 
+
+router.post('/', async (req, res) => {
+    try{
+        const tempRestaurant = new Restaurant({
+            rest_id: req.body.rest_id,
+            rest_name: req.body.rest_name,
+            location: req.body.location,
+            category: req.body.category,
+            image: req.body.image,
+        })
+        //database operation
+        const response = await tempRestaurant.save();
+        res.status(201).json(response);
+    }
+    catch(err){
+        res.status(400).json(err);
+    }
+})
 
 
 
