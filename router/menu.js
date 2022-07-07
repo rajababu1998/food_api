@@ -3,12 +3,14 @@ const Menu = require('../models/Menu');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/:restid', async (req, res) => {
     try {
-        res.send('menu route active...')
+        const tempid = req.params.restid;
+        const response = await Menu.find({rest_id: tempid});
+        res.status(200).json(response);
     }
-    catch {
-
+    catch(err) {
+        res.status(400).json(err);
     }
 })
 
