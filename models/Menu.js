@@ -27,6 +27,9 @@ const MenuSchema = mongoose.Schema({
     },
     description: {
         type: String
+    },
+    food_image: {
+        type: String
     }
 })
 
