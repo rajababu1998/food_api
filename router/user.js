@@ -34,11 +34,13 @@ router.get('/allusers', async(req, res) => {
     }
 })
 
-router.post('/login', async(req, res) => {
+router.post('/login', async (req, res) => {
     const tempUsername = req.body.username;
     const tempPassword = req.body.password;
     try{
         const response = await User.find({username: tempUsername, password: tempPassword });
+        //const response = await User.findOne({username: tempUsername});
+        // if - response.password === tempPassword
         if(response.length === 0) {
             res.status(422).json('User Not Found');
         }
