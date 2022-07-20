@@ -60,7 +60,7 @@ router.get('/', async (req, res) => {
 
 
 
-
+//http://localhost:4000/restaurants
 router.post('/', async (req, res) => {
     try{
         const tempRestaurant = new Restaurant({
@@ -79,7 +79,22 @@ router.post('/', async (req, res) => {
     }
 })
 
-
-
+//http://localhost:4000/restaurants/update
+router.put('/update', async (req, res) => {
+    try{
+        const tempRestaurant = {
+            rest_id: req.body.rest_id,
+            rest_name: req.body.rest_name,
+            location: req.body.location.toLowerCase(),
+            category: req.body.category,
+            image: req.body.image,
+        }
+        const response = await Restaurant.findOneAndUpdate({'rest_id': tempRestaurant.rest_id}, tempRestaurant, {new: true});
+        res.status(200).json(response);
+    }
+    catch(err){
+        res.status(400).json(err)
+    }
+})
 
 module.exports = router;
