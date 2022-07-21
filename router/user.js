@@ -45,6 +45,8 @@ router.post('/login', async (req, res) => {
             res.status(422).json('User Not Found');
         }
         else if (response.length === 1) {
+            //successfull login
+            //jwt - step 1
             res.status(200).json(response[0]);
         }
         else {

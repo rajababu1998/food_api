@@ -7,6 +7,10 @@ const OrdersSchema = mongoose.Schema({
         unique: true,
         index: true
     },
+    username: {
+        type: String,
+        required: true
+    },
     rest_id: {
         type: String,
     },

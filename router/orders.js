@@ -8,12 +8,22 @@ router.post('/placeorder', async(req, res) => {
     try{
         const tempOrder = new Orders({
             orderid: parseInt(Math.random()*10000000000),
+            username: req.body.username,
             rest_id: req.body.rest_id,
             rest_name: req.body.rest_name,
             city: req.body.city,
             amount: req.body.amount
         })
         const response = await tempOrder.save();
+        //store order details in loop - req.body.foodItems
+        // const tempOrder = new OrderDetails({
+        //     orderid: response.orderid,
+        //     food_id: req.body,
+        //     food_name: req.body,
+        //     quantity: req.body,
+        //     price: req.body
+        // })
+        // const response = await tempOrder.save();
         res.status(201).json(response);
     }
     catch(err) {
@@ -21,7 +31,7 @@ router.post('/placeorder', async(req, res) => {
     }
 })
 
-
+//http://localhost:4000/orders/allorders
 router.get('/allorders', async(req, res) => {
     try{
         
