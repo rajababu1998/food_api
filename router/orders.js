@@ -3,8 +3,31 @@ const Orders = require('../models/Orders');
 
 const router = express.Router();
 
+const jwt = require('jsonwebtoken');
+
+const verifyJwt = (req, res, next) => {
+    const token = req.headers["x-access-token"];
+
+    if(!token) {
+        res.status(400).json({err: 'Token Missing'})
+    }
+    else{
+        jwt.verify(token, "newtonschool", (err, decoded) => {
+            if(err) {
+                res.status(400).json({err: 'Token Mismatch'})
+            }
+            else {
+                //favourable scenario
+                console.log('decoded', decoded);
+                next();
+            }
+        })
+    }
+}
+
 //http://localhost:4000/orders/placeorder
-router.post('/placeorder', async(req, res) => {
+router.post('/placeorder', verifyJwt, async(req, res) => {
+    //console.log(req.headers["x-access-token"]);
     try{
         const tempOrder = new Orders({
             orderid: parseInt(Math.random()*10000000000),
