@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
             food_category: req.body.food_category,
             price: req.body.price,
             description: req.body.description,
+            image: req.body.image
         })
         //database operation
         const response = await tempMenu.save();

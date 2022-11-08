@@ -68,7 +68,12 @@ router.post('/', async (req, res) => {
             rest_name: req.body.rest_name,
             location: req.body.location.toLowerCase(),
             category: req.body.category,
+            price: req.body.price,
             image: req.body.image,
+            image1: req.body.image1,
+            image2: req.body.image2,
+            image3: req.body.image3,
+            image4: req.body.image4,
         })
         //database operation
         const response = await tempRestaurant.save();
@@ -96,5 +101,8 @@ router.put('/update', async (req, res) => {
         res.status(400).json(err)
     }
 })
+
+
+// add menu
 
 module.exports = router;

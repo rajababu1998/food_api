@@ -8,6 +8,7 @@ const RestaurantSchema = mongoose.Schema({
         unique: true,
         index: true
     },
+    
     rest_name: {
         type: String,
         required: true
@@ -19,6 +20,9 @@ const RestaurantSchema = mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    price: {
+        type: String
     },
     image: {
         type: String,

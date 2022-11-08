@@ -25,9 +25,27 @@ const verifyJwt = (req, res, next) => {
     }
 }
 
+const veryfyjwt = (req, res, next) => {
+    const token = req.headers["x-access-token"];
+    
+    if(!token) {
+        res.status(400).json({err: "Token missing"});
+    }
+    else {
+        jwt.verify(token, "scanner", (err, decoded) => {
+            if(err) {
+                res.status(400).json({err: "Token mismatch"});
+            }
+            else {
+                console.log('decoded', decoded);
+                next();
+            }
+        })
+    }
+}
 //http://localhost:4000/orders/placeorder
-router.post('/placeorder', verifyJwt, async(req, res) => {
-    //console.log(req.headers["x-access-token"]);
+router.post('/placeorder', veryfyjwt, async (req, res) => {
+    // console.log(req.headers["x-access-token"]);
     try{
         const tempOrder = new Orders({
             orderid: parseInt(Math.random()*10000000000),
