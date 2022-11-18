@@ -1,5 +1,10 @@
 const express = require('express');
+
+const path = require('path');
 const app = express();
+
+
+
 const cors = require('cors');
 const colors = require('colors');
 const restaurantRoute = require('./router/restaurants');
@@ -25,6 +30,7 @@ app.use('/restaurants', restaurantRoute);
 app.use('/menu', menuRoute);
 app.use('/user', userRoute);
 app.use('/orders', ordersRoute);
+app.use(express.static(path.join(__dirname, '/public')));
 
 mongoose.connect('mongodb+srv://raja98:anks2657@cluster0.bfswlwk.mongodb.net/food?retryWrites=true&w=majority' , ()=> {
     console.log(colors.yellow('MongoDB connected...'))
