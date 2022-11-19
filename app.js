@@ -3,8 +3,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-
-
 const cors = require('cors');
 const colors = require('colors');
 const restaurantRoute = require('./router/restaurants');
